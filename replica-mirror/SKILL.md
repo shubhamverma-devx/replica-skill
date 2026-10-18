@@ -21,6 +21,7 @@ Works on anything you can screenshot. The tools assume Android over adb; for web
 or iOS, capture however you normally do and skip to step 2.
 
 ```
+replica/ui/             paired view-hierarchy dumps, one per screen
 replica/screens/        reference screenshots of the original
 replica/clone-screens/  the same screens from the clone, same device, same size
 replica/mirror-log.md   one line per screen per pass: what differed, what changed
@@ -51,6 +52,13 @@ and the screenshot you get is an advertiser's landing page. Airplane mode is the
 cheapest fix. **Check every capture is the screen you meant** - a misfired shot
 silently poisons every comparison after it.
 
+Ad frequency climbs the longer you navigate, and cached creatives still fire in
+airplane mode. When a session degrades to an ad on every launch, stop pressing
+back and ask the user whether their copy may be cleared: `pm clear` resets the
+frequency cap, but it also wipes their progress in that app, so it is their
+call, not yours. Verify every dump actually contains the screen you wanted
+(`grep` for a string only it has) rather than trusting that the tap landed.
+
 ## Step 2: read the real palette, do not guess one
 
 ```bash
@@ -67,7 +75,35 @@ every accent, and each badge or pill.
 When a sampled value fails contrast, say so and let the user decide. Matching a
 2.8:1 grey is a real choice with a real cost, not a detail to bury.
 
-## Step 3: compare tile by tile
+## Step 3: diff the layout element by element
+
+**Do this before looking at pixels.** A screenshot says something is wrong; this
+says what, where and by how much, for every element at once, which is the
+difference between fixing a screen in one pass and fixing one anchor per round
+trip.
+
+```bash
+python3 uidiff.py capture com.their.app  ref.xml
+python3 uidiff.py capture com.your.app   clone.xml
+python3 uidiff.py diff ref.xml clone.xml --tolerance 10
+```
+
+It reports three things:
+
+- **MISSING** - in the reference, absent from the clone. A missing row is a
+  harder error than a misplaced one and is invisible in a pixel diff.
+- **EXTRA** - in the clone, not in the reference.
+- **OFF POSITION** - every matched element's dx, dy, dw, dh in pixels.
+
+Read the dy column top to bottom. If the numbers grow as you go down, the error
+is **cumulative spacing**, not any single component: each section is adding a
+little and by mid-screen you are a whole card out. Fix the tokens, not the
+elements.
+
+Convert with the device's density before changing code: on a 1080-wide phone at
+3x, 1dp is 3px, so a 30px gap is 10dp.
+
+## Step 4: compare tile by tile
 
 ```bash
 python3 tilediff.py replica/screens/s13.png replica/clone-screens/S13.png
@@ -90,7 +126,7 @@ is the reverse. Fix what the numbers actually say.
 down, and that shows up as band after band drifting rather than as a single bad
 tile. Fix the rhythm, then the tiles.
 
-## Step 4: identify the typeface, do not assume it
+## Step 5: identify the typeface, do not assume it
 
 Crop the same heading from both at 3x and set them one above the other. Look at
 the single/double-storey `a`, the `g` descender, the `G` spur, the `y` tail and
@@ -105,7 +141,7 @@ Then render your candidates at matched cap height and compare. The first guess i
 usually wrong in width, which is invisible in isolation and obvious side by side.
 If the original uses a licensed font, pick the closest open one and say which.
 
-## Step 5: loop
+## Step 6: loop
 
 One screen at a time, worst band first, re-capture after every change. Stop when
 the remaining differences are only the things you are deliberately not copying -
