@@ -65,7 +65,7 @@ The tools need Python 3.8 or newer. Nothing to pip install.
 | `/replica-launch` | Landing page, pricing and App Store listing. |
 | `/replica-deploy` | Ships it live on your own domain. |
 | `/replica-mirror` | Captures both apps and compares them tile by tile until the screens actually match. Samples the real palette instead of guessing it. |
-| `/replica-motion` | Generates the character animations a clone cannot copy, as Lottie, from a parametric rig. |
+| `/replica-motion` | Generates the character animations a clone cannot copy: a parametric rig for prototyping, and retargeting onto a real rigged character for shipping. |
 
 ## How to use it
 
@@ -194,7 +194,8 @@ replica-recon/         SKILL.md, recon-map.md, features.csv (the matrix template
 replica-architect/     SKILL.md, architecture.md
 replica-design/        SKILL.md, tokens.json, contrast.py
 replica-mirror/        SKILL.md, capture.py, palette.py, tilediff.py
-replica-motion/        SKILL.md, rig.py, fk.py, exercises.py, build.py, posters.py, preview.py
+replica-motion/        SKILL.md, CHARACTER.md, rig.py, fk.py, exercises.py, build.py,
+                       posters.py, preview.py, render_character.py, inspect_rest.py
 replica-build/         SKILL.md
 replica-backend/       SKILL.md
 replica-test/          SKILL.md, test-plan.md, bug-report.md, e2e.example.spec.ts

@@ -114,9 +114,17 @@ and dark, instead of needing two.
 
 ## When to go further
 
-If the product needs photoreal figures, this rig is still the right first step -
-it fixes the timing, the framing and the pose library, which is most of the work.
-Swapping the renderer later changes how a figure looks, not what it does.
+The parametric rig produces a mannequin. It is right for a prototype and wrong
+for anything users pay a subscription for, and no amount of tuning closes that
+gap - it is a modelling problem, not a parameter problem.
+
+**See CHARACTER.md.** It keeps the poses, timing, framing and ground lock and
+retargets them onto a real modelled, skinned, rigged body that the user
+downloads (Mixamo is free). The rig work is not wasted: the poses are the
+expensive part and they carry over unchanged.
+
+Say this plainly rather than iterating on a blob. Three rounds of tuning a
+primitive figure is three rounds the user paid for and did not want.
 
 ## Output
 
