@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "replica-skill",
-      "description": "Eleven Claude skills that clone any app: recon, architecture, design, build, backend, test, parity diff, a review-reading Entrepreneur skill, brand, launch and deploy.",
+      "description": "Thirteen Claude skills that clone any app: recon, architecture, design, motion, build, pixel-level mirroring, backend, test, parity diff, a review-reading Entrepreneur skill, brand, launch and deploy.",
       "source": "./",
       "category": "productivity",
       "homepage": "https://github.com/Jakeschincariol/replica-skill"

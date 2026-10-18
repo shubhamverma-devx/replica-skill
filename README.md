@@ -1,6 +1,6 @@
 # The Replica skill
 
-Eleven Claude skills that clone any app. Free, MIT, no signup, no API key,
+Thirteen Claude skills that clone any app. Free, MIT, no signup, no API key,
 nothing to connect.
 
 One reverse-engineers the app you want to clone. One rebuilds it. One tests it
@@ -49,7 +49,7 @@ method works.
 
 The tools need Python 3.8 or newer. Nothing to pip install.
 
-## The eleven
+## The thirteen
 
 | command | what it does |
 | --- | --- |
@@ -64,6 +64,8 @@ The tools need Python 3.8 or newer. Nothing to pip install.
 | `/replica-brand` | Names and rebrands your version so it is yours. |
 | `/replica-launch` | Landing page, pricing and App Store listing. |
 | `/replica-deploy` | Ships it live on your own domain. |
+| `/replica-mirror` | Captures both apps and compares them tile by tile until the screens actually match. Samples the real palette instead of guessing it. |
+| `/replica-motion` | Generates the character animations a clone cannot copy, as Lottie, from a parametric rig. |
 
 ## How to use it
 
@@ -71,7 +73,7 @@ Run them in order. Each one reads what the last one wrote, in a `replica/`
 folder in your project.
 
 ```
-recon -> architect -> design -> build -> backend -> test -> diff -> entrepreneur -> brand -> launch -> deploy
+recon -> architect -> design -> motion -> build -> mirror -> backend -> test -> diff -> entrepreneur -> brand -> launch -> deploy
 ```
 
 An example: cloning a scheduling app, the kind where you share a link and
@@ -191,6 +193,8 @@ there is money on the line. This is not legal advice.
 replica-recon/         SKILL.md, recon-map.md, features.csv (the matrix template)
 replica-architect/     SKILL.md, architecture.md
 replica-design/        SKILL.md, tokens.json, contrast.py
+replica-mirror/        SKILL.md, capture.py, palette.py, tilediff.py
+replica-motion/        SKILL.md, rig.py, fk.py, exercises.py, build.py, posters.py, preview.py
 replica-build/         SKILL.md
 replica-backend/       SKILL.md
 replica-test/          SKILL.md, test-plan.md, bug-report.md, e2e.example.spec.ts
